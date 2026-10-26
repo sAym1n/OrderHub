@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using OrderHub.Domain;
 using OrderHub.Services;
 
 namespace OrderHub;
@@ -9,21 +11,39 @@ internal class Program
     {
         Console.OutputEncoding = System.Text.Encoding.UTF8;
 
-        var catalog = new CatalogService();
+        var reports = new ReportService();
 
-        catalog.AddProduct("Клавиатура механика", 5490.00m, "Периферия");
-        catalog.AddProduct("Мышь", 2990.00m, "Периферия");
-        catalog.AddProduct("Игровой ультраширокий монитор", 24990.00m, "Мониторы");
+        var products = new List<Product>
+        {
+            new Product("Мышь", 2990.00m, "Периферия"),
+            new Product("Клавиатура механика", 5490.00m, "Периферия"),
+            new Product("Игровой ультраширокий монитор", 24990.00m, "Мониторы")
+        };
 
-        catalog.PrintAll();
-        Console.WriteLine();
+        Console.WriteLine("АНАЛИЗ ПРИ ПОРОГЕ ЦЕНЫ: 5000");
 
-        catalog.PrintSortedByNaturalOrder();
-        Console.WriteLine();
+        var list1 = reports.ExpensiveProducts(products, 5000m);
+        foreach (string line in list1)
+        {
+            Console.WriteLine($"  {line}");
+        }
 
-        catalog.PrintSortedByName();
-        Console.WriteLine();
+        Console.WriteLine($"Количество дорогих товаров: {reports.CountExpensive(products, 5000m)}");
+        Console.WriteLine($"Есть товары дороже 50000: {reports.HasVeryExpensive(products, 50000m)}");
+        Console.WriteLine($"У всех товаров цена больше нуля: {reports.AllInStock(products)}");
+        Console.WriteLine($"Самый дешевый товар: {reports.Cheapest(products)}");
 
-        catalog.PrintSortedByNameLength();
+        Console.WriteLine("\nАНАЛИЗ ПРИ ПОРОГЕ ЦЕНЫ: 15000");
+
+        var list2 = reports.ExpensiveProducts(products, 15000m);
+        foreach (string line in list2)
+        {
+            Console.WriteLine($"  {line}");
+        }
+
+        Console.WriteLine($"Количество дорогих товаров: {reports.CountExpensive(products, 15000m)}");
+        Console.WriteLine($"Есть товары дороже 50000: {reports.HasVeryExpensive(products, 50000m)}");
+        Console.WriteLine($"У всех товаров цена больше нуля: {reports.AllInStock(products)}");
+        Console.WriteLine($"Самый дешевый товар: {reports.Cheapest(products)}");
     }
 }

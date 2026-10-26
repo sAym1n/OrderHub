@@ -7,6 +7,10 @@
       "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:OrderHub\\Program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\user105-14\\Desktop\\src\\OrderHub\\Services\\ReportService.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:OrderHub\\Services\\ReportService.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\user105-14\\Desktop\\src\\OrderHub\\Services\\CatalogService.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:OrderHub\\Services\\CatalogService.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -30,11 +34,24 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 3,
+          "SelectedChildIndex": 4,
           "Children": [
             {
               "$type": "Document",
               "DocumentIndex": 1,
+              "Title": "ReportService.cs",
+              "DocumentMoniker": "C:\\Users\\user105-14\\Desktop\\src\\OrderHub\\Services\\ReportService.cs",
+              "RelativeDocumentMoniker": "OrderHub\\Services\\ReportService.cs",
+              "ToolTip": "C:\\Users\\user105-14\\Desktop\\src\\OrderHub\\Services\\ReportService.cs",
+              "RelativeToolTip": "OrderHub\\Services\\ReportService.cs",
+              "ViewState": "AgIAAAUAAAAAAAAAAAAkwBQAAAA4AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-10-26T12:40:04.358Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
               "Title": "CatalogService.cs",
               "DocumentMoniker": "C:\\Users\\user105-14\\Desktop\\src\\OrderHub\\Services\\CatalogService.cs",
               "RelativeDocumentMoniker": "OrderHub\\Services\\CatalogService.cs",
@@ -42,12 +59,11 @@
               "RelativeToolTip": "OrderHub\\Services\\CatalogService.cs",
               "ViewState": "AgIAABYAAAAAAAAAAAAkwCMAAAApAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-10-26T12:30:00.074Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-10-26T12:30:00.074Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 3,
               "Title": "Product.cs",
               "DocumentMoniker": "C:\\Users\\user105-14\\Desktop\\src\\OrderHub\\Domain\\Product.cs",
               "RelativeDocumentMoniker": "OrderHub\\Domain\\Product.cs",
@@ -55,12 +71,11 @@
               "RelativeToolTip": "OrderHub\\Domain\\Product.cs",
               "ViewState": "AgIAAAwAAAAAAAAAAAAkwBEAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-10-26T12:29:46.497Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-10-26T12:29:46.497Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 4,
               "Title": "WarehouseService.cs",
               "DocumentMoniker": "C:\\Users\\user105-14\\Desktop\\src\\OrderHub\\Services\\WarehouseService.cs",
               "RelativeDocumentMoniker": "OrderHub\\Services\\WarehouseService.cs",
@@ -78,14 +93,14 @@
               "RelativeDocumentMoniker": "OrderHub\\Program.cs",
               "ToolTip": "C:\\Users\\user105-14\\Desktop\\src\\OrderHub\\Program.cs",
               "RelativeToolTip": "OrderHub\\Program.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABcAAAAkAAAAAAAAAA==",
+              "ViewState": "AgIAABIAAAAAAAAAAAAAwDEAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-10-26T12:20:26.086Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 5,
               "Title": "OrderService.cs",
               "DocumentMoniker": "C:\\Users\\user105-14\\Desktop\\src\\OrderHub\\Services\\OrderService.cs",
               "RelativeDocumentMoniker": "OrderHub\\Services\\OrderService.cs",

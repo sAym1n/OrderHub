@@ -72,4 +72,49 @@ public class ReportService
             .Select(s => s.Category)
             .ToList();
     }
+
+    public List<string> TopCustomers(IEnumerable<Customer> customers, IEnumerable<Order> orders, int topCount)
+    {
+        return customers
+            .Join(
+                orders,
+                c => c.Name,
+                o => o.CustomerName,
+                (c, o) => new { CustomerName = c.Name, OrderPrice = o.Price }
+            )
+            .GroupBy(pair => pair.CustomerName)
+            .Select(g => new
+            {
+                Name = g.Key,
+                TotalSum = g.Sum(pair => pair.OrderPrice)
+            })
+            .OrderByDescending(res => res.TotalSum)
+            .Take(topCount)
+            .Select(res => $"{res.Name} — {res.TotalSum:0.00} ₽")
+            .ToList();
+    }
+
+    public decimal TotalRevenueByYear(IEnumerable<Order> orders, int year)
+    {
+        return orders.Where(o => o.CreatedAt.Year == year).Sum(o => o.Price);
+    }
+
+    public string MostActiveCustomer(IEnumerable<Order> orders)
+    {
+        if (!orders.Any()) return "Нет данных";
+
+        return orders
+            .GroupBy(o => o.CustomerName)
+            .OrderByDescending(g => g.Count())
+            .Select(g => g.Key)
+            .FirstOrDefault() ?? "Нет данных";
+    }
+
+    public List<Order> GetOrdersAboveAverage(IEnumerable<Order> orders)
+    {
+        if (!orders.Any()) return new List<Order>();
+
+        decimal averagePrice = orders.Average(o => o.Price);
+        return orders.Where(o => o.Price > averagePrice).ToList();
+    }
 }

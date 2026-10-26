@@ -13,30 +13,41 @@ internal class Program
 
         var reports = new ReportService();
 
-        var products = new List<Product>
+        var customers = new List<Customer>
         {
-            new Product("Мышь", 2990.00m, "Периферия"),
-            new Product("Клавиатура механика", 5490.00m, "Периферия"),
-            new Product("Коврик для мыши", 990.00m, "Периферия"),
-            new Product("Игровой монитор 24", 14990.00m, "Мониторы"),
-            new Product("Монитор 4K 32", 34990.00m, "Мониторы"),
-            new Product("Игровое кресло", 19990.00m, "Мебель")
+            new Customer(101, "Иванов", "Москва"),
+            new Customer(102, "Петров", "Тула"),
+            new Customer(103, "Сидоров", "Казань"),
+            new Customer(104, "Васильев", "Тверь")
         };
 
-        Console.WriteLine("СВОДКА ПО КАТЕГОРИЯМ (Группировка и агрегаты LINQ)");
-        var summary = reports.SummarizeByCategory(products);
-        foreach (var row in summary)
+        var orders = new List<Order>
         {
-            Console.WriteLine($"  {row.Category}: {row.Count} шт., средняя {row.AveragePrice:0.00} ₽");
+            new Order(1, "Иванов", "Клавиатура", 5000m, new DateTime(2026, 3, 12)),
+            new Order(2, "Иванов", "Коврик", 1500m, new DateTime(2026, 5, 20)),
+            new Order(3, "Петров", "Монитор", 25000m, new DateTime(2026, 4, 15)),
+            new Order(4, "Сидоров", "Мышь", 3000m, new DateTime(2026, 2, 10)),
+            new Order(5, "Сидоров", "Ноутбук", 70000m, new DateTime(2026, 6, 1)),
+            new Order(6, "Васильев", "Кабель", 500m, new DateTime(2025, 12, 25)),
+            new Order(7, "Иванов", "Наушники", 4500m, new DateTime(2026, 7, 14))
+        };
+
+        Console.WriteLine("ТОП-3 КЛИЕНТА ПО СУММЕ ЗАКАЗОВ");
+        var top = reports.TopCustomers(customers, orders, 3);
+        foreach (var line in top)
+        {
+            Console.WriteLine($"  {line}");
         }
 
-        Console.WriteLine($"\nСамая дорогая категория (по средней цене): {reports.MostExpensiveCategory(products)}");
+        Console.WriteLine($"\nОбщая выручка за 2026 год: {reports.TotalRevenueByYear(orders, 2026):0.00} ₽");
 
-        Console.WriteLine("\nКатегории, где товаров не меньше 2:");
-        var popularCategories = reports.GetCategoriesWithMinProducts(products, 2);
-        foreach (var cat in popularCategories)
+        Console.WriteLine($"Клиент с наибольшим числом заказов: {reports.MostActiveCustomer(orders)}");
+
+        Console.WriteLine("\nЗаказы с суммой выше средней:");
+        var expensiveOrders = reports.GetOrdersAboveAverage(orders);
+        foreach (var order in expensiveOrders)
         {
-            Console.WriteLine($"  {cat}");
+            Console.WriteLine($"  {order}");
         }
     }
 }

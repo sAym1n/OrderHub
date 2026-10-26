@@ -17,33 +17,26 @@ internal class Program
         {
             new Product("Мышь", 2990.00m, "Периферия"),
             new Product("Клавиатура механика", 5490.00m, "Периферия"),
-            new Product("Игровой ультраширокий монитор", 24990.00m, "Мониторы")
+            new Product("Коврик для мыши", 990.00m, "Периферия"),
+            new Product("Игровой монитор 24", 14990.00m, "Мониторы"),
+            new Product("Монитор 4K 32", 34990.00m, "Мониторы"),
+            new Product("Игровое кресло", 19990.00m, "Мебель")
         };
 
-        Console.WriteLine("АНАЛИЗ ПРИ ПОРОГЕ ЦЕНЫ: 5000");
-
-        var list1 = reports.ExpensiveProducts(products, 5000m);
-        foreach (string line in list1)
+        Console.WriteLine("СВОДКА ПО КАТЕГОРИЯМ (Группировка и агрегаты LINQ)");
+        var summary = reports.SummarizeByCategory(products);
+        foreach (var row in summary)
         {
-            Console.WriteLine($"  {line}");
+            Console.WriteLine($"  {row.Category}: {row.Count} шт., средняя {row.AveragePrice:0.00} ₽");
         }
 
-        Console.WriteLine($"Количество дорогих товаров: {reports.CountExpensive(products, 5000m)}");
-        Console.WriteLine($"Есть товары дороже 50000: {reports.HasVeryExpensive(products, 50000m)}");
-        Console.WriteLine($"У всех товаров цена больше нуля: {reports.AllInStock(products)}");
-        Console.WriteLine($"Самый дешевый товар: {reports.Cheapest(products)}");
+        Console.WriteLine($"\nСамая дорогая категория (по средней цене): {reports.MostExpensiveCategory(products)}");
 
-        Console.WriteLine("\nАНАЛИЗ ПРИ ПОРОГЕ ЦЕНЫ: 15000");
-
-        var list2 = reports.ExpensiveProducts(products, 15000m);
-        foreach (string line in list2)
+        Console.WriteLine("\nКатегории, где товаров не меньше 2:");
+        var popularCategories = reports.GetCategoriesWithMinProducts(products, 2);
+        foreach (var cat in popularCategories)
         {
-            Console.WriteLine($"  {line}");
+            Console.WriteLine($"  {cat}");
         }
-
-        Console.WriteLine($"Количество дорогих товаров: {reports.CountExpensive(products, 15000m)}");
-        Console.WriteLine($"Есть товары дороже 50000: {reports.HasVeryExpensive(products, 50000m)}");
-        Console.WriteLine($"У всех товаров цена больше нуля: {reports.AllInStock(products)}");
-        Console.WriteLine($"Самый дешевый товар: {reports.Cheapest(products)}");
     }
 }

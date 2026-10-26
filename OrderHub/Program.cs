@@ -11,40 +11,44 @@ internal class Program
 
         var service = new OrderService();
 
-        Console.WriteLine("1. Создание заказов");
-        var o1 = service.CreateOrder("Иванов", "Клавиатура", 5490.00m);
-        var o2 = service.CreateOrder("Петров", "Мышь", 2990.00m);
-        var o3 = service.CreateOrder("Сидоров", "Монитор", 24990.00m);
+        var order1 = service.CreateOrder("Иванов", "Клавиатура", 5490m);
+        var order2 = service.CreateOrder("Петрова", "Монитор", 18990m);
 
-        PrintState(service);
+        Console.WriteLine("1. Инициализация истории (Иванов, затем Петрова)");
+        service.InitHistory(order1, order2);
+        service.PrintHistory();
 
-        Console.WriteLine("\n2. Обработка первого заказа (FIFO)");
-        var processed = service.ProcessNextOrder();
-        Console.WriteLine($"Успешно обработан: {processed}");
+        Console.WriteLine("\n2. Вставка нового заказа ПОСЛЕ текущего (Текущий: Петрова)");
+        var orderAfterCurrent = service.CreateOrder("Сидоров", "Мышь", 1500m);
+        service.PlaceOrderAfterCurrent(orderAfterCurrent);
+        service.PrintHistory();
 
-        PrintState(service);
+        Console.WriteLine("\n3. Смена текущего узла назад и повторная вставка");
+        service.InitHistory(order1);
+        service.PrintHistory();
 
-        Console.WriteLine("\n3. Отмена последних действий (LIFO)");
-        Console.WriteLine(service.UndoLastAction());
-        Console.WriteLine(service.UndoLastAction());
+        Console.WriteLine("\nВставляем заказ Петровой сразу ПОСЛЕ Иванова");
+        service.PlaceOrderAfterCurrent(order2);
+        service.PrintHistory();
 
-        PrintState(service);
-    }
+        Console.WriteLine("\n4. Проверка поиска заказов (TryFindOrder)");
 
-    private static void PrintState(OrderService service)
-    {
-        Console.WriteLine("\nТЕКУЩЕЕ СОСТОЯНИЕ СИСТЕМЫ");
+        if (service.TryFindOrder("Иванов", out var foundOrder))
+        {
+            Console.WriteLine($"Успешно: найден заказ клиента Иванов: {foundOrder}");
+        }
+        else
+        {
+            Console.WriteLine("Ошибка: заказ Иванова не найден");
+        }
 
-        Console.WriteLine("[СПИСОК ВСЕХ ЗАКАЗОВ (List)]:");
-        foreach (var order in service.GetAllOrders())
-            Console.WriteLine($"  {order}");
-
-        Console.WriteLine("[ОЧЕРЕДЬ НА ОБРАБОТКУ (Queue)]:");
-        foreach (var order in service.GetPendingQueue())
-            Console.WriteLine($"  {order}");
-
-        Console.WriteLine("[ИСТОРИЯ ДЕЙСТВИЙ (Stack)]:");
-        foreach (var action in service.GetUndoHistory())
-            Console.WriteLine($"  {action}");
+        if (service.TryFindOrder("Нет такого", out var missingOrder))
+        {
+            Console.WriteLine($"Ошибка: найден несуществующий заказ: {missingOrder}");
+        }
+        else
+        {
+            Console.WriteLine("Успешно: метод вернул false для несуществующего клиента без исключений");
+        }
     }
 }

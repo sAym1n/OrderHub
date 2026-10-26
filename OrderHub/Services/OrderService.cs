@@ -35,8 +35,10 @@ public class OrderService
     private readonly List<Order> _allOrders = new();
     private readonly Queue<Order> _pendingQueue = new();
     private readonly Stack<UndoAction> _undoHistory = new();
-
     private int _nextId = 1;
+
+    private readonly LinkedList<Order> _orderHistory = new();
+    private LinkedListNode<Order>? _current;
 
     public Order CreateOrder(string customerName, string productName, decimal price)
     {
@@ -108,4 +110,58 @@ public class OrderService
     public IEnumerable<Order> GetAllOrders() => _allOrders;
     public IEnumerable<Order> GetPendingQueue() => _pendingQueue;
     public IEnumerable<string> GetUndoHistory() => _undoHistory.Select(a => a.ToString());
+
+    public void InitHistory(params Order[] orders)
+    {
+        _orderHistory.Clear();
+        _current = null;
+
+        foreach (var order in orders)
+        {
+            _current = _orderHistory.AddLast(order);
+        }
+    }
+
+    public bool PlaceOrderAfterCurrent(Order order)
+    {
+        if (_current == null)
+        {
+            _current = _orderHistory.AddLast(order);
+        }
+        else
+        {
+            _current = _orderHistory.AddAfter(_current, order);
+        }
+
+        return true;
+    }
+
+    public bool TryFindOrder(string customerName, out Order? order)
+    {
+        var node = _orderHistory.First;
+        while (node != null)
+        {
+            if (node.Value.CustomerName.Equals(customerName, StringComparison.OrdinalIgnoreCase))
+            {
+                order = node.Value;
+                return true;
+            }
+            node = node.Next;
+        }
+
+        order = null;
+        return false;
+    }
+
+    public void PrintHistory()
+    {
+        Console.WriteLine("[ИСТОРИЯ ЗАКАЗОВ (LinkedList)]:");
+        foreach (var order in _orderHistory)
+        {
+            string marker = (_current != null && _current.Value.Id == order.Id) ? " -> " : "    ";
+            Console.WriteLine($"{marker}{order}");
+        }
+
+        Console.WriteLine($"Текущий активный заказ: {(_current != null ? _current.Value.ToString() : "нет")}");
+    }
 }

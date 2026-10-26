@@ -26,3 +26,4 @@ C:\Users\user105-14\Desktop\src\OrderHub\obj\Debug\net9.0\refint\OrderHub.dll
 C:\Users\user105-14\Desktop\src\OrderHub\obj\Debug\net9.0\OrderHub.pdb
 C:\Users\user105-14\Desktop\src\OrderHub\obj\Debug\net9.0\OrderHub.genruntimeconfig.cache
 C:\Users\user105-14\Desktop\src\OrderHub\obj\Debug\net9.0\ref\OrderHub.dll
+C:\Users\user105-14\Desktop\src\OrderHub\obj\Debug\net9.0\OrderHub.sourcelink.json

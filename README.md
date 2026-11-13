@@ -9,7 +9,7 @@
  Как собрать и запустить
 1. Клонируйте репозиторий:
 
-   git clone https://github.com
+   git clone https://github.com/sAym1n/OrderHub.git
    cd OrderHub
    
 2. Запустите консольное приложение:

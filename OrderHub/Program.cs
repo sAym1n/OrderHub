@@ -1,23 +1,28 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using OrderHub.Domain;
-using OrderHub.Services;
+using OrderHub.Collections;
 
-IEnumerable<Order> orders = OrderStream.Orders();
-Console.WriteLine("После вызова метода");
+var buffer = new CircularBuffer<string>(3);
 
-foreach (var order in orders.Take(5))
+buffer.Add("1");
+buffer.Add("2");
+buffer.Add("3");
+buffer.Add("4");
+buffer.Add("5");
+
+foreach (var item in buffer)
 {
-    Console.WriteLine(order);
+    Console.WriteLine(item);
 }
 
-IEnumerable<Order> expensiveOrders = OrderStream.Expensive(10, 10000m);
-Console.WriteLine("После вызова Expensive");
-
-foreach (var order in expensiveOrders)
+foreach (var item in buffer.Reverse())
 {
-    Console.WriteLine(order);
+    Console.WriteLine(item);
 }
 
-Console.WriteLine("Вызов Orders().ToList() без Take() попытается загрузить все элементы в память сразу. Поскольку в Orders() используется бесконечный цикл while (true), перебор никогда не закончится, что приведёт к зависанию программы и переполнению памяти.");
+Console.WriteLine($"Count: {buffer.Count}, IsFull: {buffer.IsFull}");
+
+foreach (var formatted in buffer.Select(x => $"[{x}]"))
+{
+    Console.WriteLine(formatted);
+}
